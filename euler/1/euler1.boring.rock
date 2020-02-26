@@ -1,0 +1,28 @@
+(If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.)
+
+(Find the sum of all the multiples of 3 or 5 below 1000.)
+
+
+
+Modulo takes divisor and dividend
+  Until divisor is less than dividend
+    Let divisor be without dividend
+
+  Give back divisor
+
+
+Limit is 1000
+Three is 3
+Five is 5
+Count is 1
+Sum is 0
+
+Until count is limit
+  Let modthree be modulo taking count, three
+  Let modfive be modulo taking count, five
+  If modthree is nothing or modfive is nothing
+    Let sum be with count
+
+  Build count up
+
+Shout sum
