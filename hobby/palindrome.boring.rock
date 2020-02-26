@@ -1,0 +1,22 @@
+(palindrome recognizer)
+
+Palindrome takes word and length   ( func Palindrome(word, length)     )
+  let start be 0                   (   start = 0                       )
+  knock length down                (   length -= 1                     )
+  until start is as big as length  (   while start < length            )
+    put word at start into first   (     first = word[start]           )
+    put word at length into last   (     last = word[length]           )
+    if first ain't last            (     if first != last              )
+      give back False              (       return false                )
+
+    build start up                 (     start += 1                    )
+    knock length down              (     length -= 1                   )
+
+  give back True                   (   return true                     )
+
+
+listen to the string
+(useful idiom to get the length of a string is to cut it into an array and assign the array as a scalar to something else)
+cut the string into array
+let len be array
+shout Palindrome taking the string, len
