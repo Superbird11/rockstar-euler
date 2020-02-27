@@ -1,0 +1,38 @@
+(2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.)
+
+(What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?)
+
+(prime numbers less than 21 include)
+(2 3 5 7 11 13 17 19)
+
+(composite numbers less than 21 include)
+(4 contains 2 2)
+(6 contains 2 3)
+(8 contains 2 2 2)
+(9 contains 3 3)
+(10 contains 2 5)
+(12 contains 2 2 3)
+(14 contains 2 7)
+(15 contains 3 5)
+(16 contains 2 2 2 2)
+(18 contains 2 3 3)
+(20 contains 2 2 5)
+
+(we can reason that the smallest positive number evenly divisible)
+(by all numbers from 1 to 20 is the product of)
+(2 2 2 2 3 3 5 7 11 13 17 19)
+
+five is 5
+seven is 7
+nine is 9
+eleven is 11
+thirteen is 13
+sixteen is 16
+seventeen is 17
+nineteen is 19
+
+say five of seven of nine of eleven of thirteen of sixteen of seventeen of nineteen
+
+(the extensible solution would be to take in an integer and make a prime factorizer)
+(which tracks the maximum number of occurrences of any given prime in any number in range of that integer)
+(then multiply all of them)
