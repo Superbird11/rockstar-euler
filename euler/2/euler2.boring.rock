@@ -4,7 +4,7 @@
 
 (By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.)
 
-Modulo takes divisor and dividend       ( func modulo(divisor, dividend)    )
+Modulo takes divisor and dividend       ( func modulo{divisor, dividend}    )
   Until divisor is less than dividend   (   while divisor < dividend        )
     Let divisor be without dividend     (     divisor -= dividend           )
 
@@ -17,7 +17,7 @@ limit is 4000000                        ( limit = 4000000  // 4 million      )
 sum is 0                                ( sum = 0                            )
 
 Until second is greater than limit      ( while second < limit               )
-  If Modulo taking second, 2 is 0       (   if modulo(second, 2) == 0        )
+  If Modulo taking second, 2 is 0       (   if modulo{second, 2} == 0        )
     Let sum be with second              (     sum += second                  )
 
   let second be first plus second       (   second += first                  )

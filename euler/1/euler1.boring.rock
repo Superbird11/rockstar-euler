@@ -1,28 +1,23 @@
 (If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.)
-
 (Find the sum of all the multiples of 3 or 5 below 1000.)
 
+Modulo takes divisor and dividend                 ( func Modulo{divisor, dividend}     )
+  Until divisor is less than dividend             (   while divisor > dividend         )
+    Let divisor be without dividend               (     divisor -= dividend            )
 
+  Give back divisor                               (   return divisor                   )
 
-Modulo takes divisor and dividend
-  Until divisor is less than dividend
-    Let divisor be without dividend
+limit is 1000                                     ( limit = 1000                       )
+three is 3                                        ( three = 3                          )
+five is 5                                         ( five = 5                           )
+count is 1                                        ( count = 1                          )
+sum is 0                                          ( sum = 0                            )
+Until count is limit                              ( while count < limit                )
+  Let modthree be modulo taking count, three      (   modthree = Modulo{count, three}  )
+  Let modfive be modulo taking count, five        (   modfive = Modulo{count, five}    )
+  If modthree is nothing or modfive is nothing    (   if modthree == 0 or modfive == 0 )
+    Let sum be with count                         (     sum += count                   )
 
-  Give back divisor
+  Build count up                                  (   count++                          )
 
-
-Limit is 1000
-Three is 3
-Five is 5
-Count is 1
-Sum is 0
-
-Until count is limit
-  Let modthree be modulo taking count, three
-  Let modfive be modulo taking count, five
-  If modthree is nothing or modfive is nothing
-    Let sum be with count
-
-  Build count up
-
-Shout sum
+Shout sum                                         ( print{sum}                         )

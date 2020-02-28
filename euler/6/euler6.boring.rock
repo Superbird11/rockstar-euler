@@ -14,4 +14,4 @@ Until index is greater than limit      ( while index <= limit       )
   Let squares be with index of index   (   squares += index * index )
   Build index up                       (   index++                  )
 
-Say sum of sum without squares         ( print(sum * sum - squares) )
+Say sum of sum without squares         ( print{sum * sum - squares} )

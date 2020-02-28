@@ -1,21 +1,21 @@
 (The prime factors of 13195 are 5, 7, 13 and 29.)
 (What is the largest prime factor of the number 600851475143 ?)
 
-Modulo takes divisor and dividend                   ( func Modulo(divisor, dividend)         )
+Modulo takes divisor and dividend                   ( func Modulo{divisor, dividend}         )
   Let quotient be divisor over dividend             (   quotient = divisor / dividend        )
-  Turn down quotient                                (   quotient = floor(quotient)           )
+  Turn down quotient                                (   quotient = floor{quotient}           )
   Give back divisor minus quotient times dividend   (   return divisor - quotient * dividend ) 
 
 
 let primes at -1 be 0                               ( primes = []  // hacky workaround for making empty array )
                                                     (              // length registers as 0                   )
 
-IsPrime takes test                                  ( func IsPrime(test)                     )
+IsPrime takes test                                  ( func IsPrime{test}                     )
   Index is 0                                        (   index = 0                            )
   Let max be primes                                 (   max = primes.length                  )
   Until index is max                                (   while index < max                    )
     Let prime be primes at index                    (     prime = primes[index]              )
-    If Modulo taking test, prime is 0               (     if Modulo(test, prime)             )
+    If Modulo taking test, prime is 0               (     if Modulo{test, prime}             )
       Give back false                               (       return false                     )
 
     Build index up                                  (     index++                            )
@@ -27,13 +27,13 @@ let num be 600851475143                             ( num = 600851475143        
 let current be 2                                    ( current = 2         // current prime   )
 
 Until num is 1                                      ( while num > 1                          )
-  Until IsPrime taking current                      (   while not isPrime(current)           )
+  Until IsPrime taking current                      (   while not isPrime{current}           )
     build current up                                (     current++                          )
 
   let len be primes                                 ( len = primes.length                    )
   let primes at len be current                      ( primes[len] = current                  )
-  While Modulo taking num, current is 0             ( while Modulo(num, current) == 0        )
+  While Modulo taking num, current is 0             ( while Modulo{num, current} == 0        )
     Let num be over current                         (   num /= current                       )
 
 
-shout current                                       ( print(current)                         )
+shout current                                       ( print{current}                         )

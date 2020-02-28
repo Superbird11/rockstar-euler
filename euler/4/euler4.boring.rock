@@ -2,18 +2,18 @@
 
 (Find the largest palindrome made from the product of two 3-digit numbers.)
 
-Modulo takes divisor and dividend                                         ( func Modulo(divisor, dividend)                       )
+Modulo takes divisor and dividend                                         ( func Modulo{divisor, dividend}                       )
   Let quotient be divisor over dividend                                   (   quotient = divisor / dividend                      )
-  Turn down quotient                                                      (   quotient = floor(quotient)                         )
+  Turn down quotient                                                      (   quotient = floor{quotient}                         )
   Give back divisor minus quotient times dividend                         (   return divisor - quotient * dividend               ) 
 
 
-IsPalindrome takes num                                                    ( func isPalindrome(num)                               )
+IsPalindrome takes num                                                    ( func isPalindrome{num}                               )
   Ten is 10                                                               (   ten = 10                                           )
   Reversed is 0                                                           (   reversed = 0                                       )
   Let clone be num                                                        (   clone = num                                        )
   Until clone is 0                                                        (   while clone > 0                                    )
-    Let modulus be Modulo taking clone, ten                               (     modulus = Modulo(clone, ten)                     )
+    Let modulus be Modulo taking clone, ten                               (     modulus = Modulo{clone, ten}                     )
     Let reversed be reversed of ten with modulus                          (     reversed = reversed * 10 + modulus               )
     Let clone be over ten                                                 (     clone /= 10                                      )
     Turn down clone                                                       (     clone--                                          )
@@ -25,7 +25,7 @@ IsPalindrome takes num                                                    ( func
 First is 999                                                              ( first = 999                                          )
 Let min be first                                                          ( min = first                                          )
 Let product be first times min                                            ( product = first * min                                )
-Until IsPalindrome taking product                                         ( while not isPalindrome(product)                      )
+Until IsPalindrome taking product                                         ( while not isPalindrome{product}                      )
   Knock min down                                                          (   min--                                              )
   Let product be first times min                                          (   product = first * min                              )
 
@@ -34,7 +34,7 @@ Until first is less than min                                              ( whil
   Let second be first                                                     (   second = first                                     )
   Until second is less than min                                           (   while second >= min                                )
     Let prospect be first times second                                    (     prospect = first * second                        )
-    If prospect is greater than product and IsPalindrome taking prospect  (     if prospect > product and IsPalindrome(prospect) )
+    If prospect is greater than product and IsPalindrome taking prospect  (     if prospect > product and IsPalindrome{prospect} )
       Let product be prospect                                             (       product = prospect                             )
       Break it down                                                       (       break                                          )
 
@@ -42,4 +42,4 @@ Until first is less than min                                              ( whil
 
   Knock first down                                                        (   first--                                            )
 
-Say product                                                               ( print(product)                                       )
+Say product                                                               ( print{product}                                       )
