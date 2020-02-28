@@ -1,0 +1,17 @@
+(The sum of the squares of the first ten natural numbers is)
+(    1^2+2^2+...+10^2=385)
+(The square of the sum of the first ten natural numbers is)
+(    [1+2+...+10]^2=55^2=3025)
+(Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025−385=2640.)
+(Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.)
+
+Limit is 100                           ( limit = 100                )
+Sum is 0                               ( sum = 0                    )
+Squares is 0                           ( squares = 0                )
+Index is 1                             ( index = 1                  )
+Until index is greater than limit      ( while index <= limit       )
+  Let sum be with index                (   sum += index             )
+  Let squares be with index of index   (   squares += index * index )
+  Build index up                       (   index++                  )
+
+Say sum of sum without squares         ( print(sum * sum - squares) )
