@@ -1,0 +1,58 @@
+(recipe: primes)
+(this file includes both GenerateNPrimes and GeneratePrimesUpTo;)
+(only one should be used in any given case, and only once, because)
+(the array primes will persist between them and will cause problems)
+
+(modulo operator)
+Modulo takes divisor and dividend
+  Let quotient be divisor over dividend
+  Turn down quotient
+  Give back divisor minus quotient times dividend
+
+(initialized list of primes, for efficiency)
+Let primes at 1 be 2
+Let primes at 2 be 3
+
+(boolean function to check whether something is prime)
+(it short-circuits when the square of the prime exceeds the number being checked, for efficiency)
+IsPrime takes num
+  ipIdx is 1
+  let ipMax be primes
+  Let ipPrime be primes at ipIdx
+  Until ipIdx is primes or ipPrime of ipPrime is greater than num
+    If 0 is Modulo taking num, ipPrime
+      give back false
+
+    build ipIdx up
+    Let ipPrime be primes at ipIdx
+
+  give back true
+
+(generates a particular number of primes. Stores them in primes.)
+(Returns the last one generated, i.e. the Nth prime)
+GenerateNPrimes takes gpQuantity
+  gpIdx is 3
+  gpPrime is 3
+  While gpIdx is as low as gpQuantity
+    Let gpPrime be with 2
+    If IsPrime taking gpPrime 
+      Let primes at gpIdx be gpPrime
+      build gpIdx up
+
+
+  give back gpPrime
+
+(generate any number of primes until the next prime would be greater than or equal to the given limit)
+(Returns the last one generated, i.e. the greatest prime that is less than the given limit)
+GeneratePrimesUpTo takes gpLimit
+  gpIdx is 3
+  gpPrime is 3
+  While gpPrime is less than gpLimit
+    Let gpPrime be with 2
+    If IsPrime taking gpPrime 
+      Let primes at gpIdx be gpPrime
+      build gpIdx up
+
+
+  give back gpPrime
+  

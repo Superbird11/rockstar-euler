@@ -1,0 +1,4 @@
+Modulo takes divisor and dividend
+  Let quotient be divisor over dividend
+  Turn down quotient
+  Give back divisor minus quotient times dividend
