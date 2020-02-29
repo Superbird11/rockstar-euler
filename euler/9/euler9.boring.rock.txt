@@ -1,0 +1,22 @@
+(A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,)
+(    a^2 + b^2 = c^2)
+(For example, 32 + 42 = 9 + 16 = 25 = 52.)
+(There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+Find the product abc.)
+
+onethousand is 1000                        ( // 'a' is a reserved keyword )
+aa is 1                                    ( aa = 1                       )
+bb is 1                                    ( bb = 1                       )
+while true                                 ( while true                   )
+  let cc be onethousand minus aa minus bb  (   cc = 1000 - aa - bb        )
+  if aa of aa plus bb of bb is cc of cc    (   if aa^2 + bb^2 == cc^2     )
+    break it down                          (     break                    )
+
+  build bb up                              (   bb++                       )
+  if bb is as big as cc                    (   if bb >= cc                )
+    build aa up                            (     aa++                     )
+    let bb be aa                           (     bb = aa                  )
+
+
+say aa of bb of cc                         ( print{aa * bb * cc}          )
+
