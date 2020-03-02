@@ -1,0 +1,45 @@
+(The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.)
+(Find the sum of all the primes below two million.)
+
+(This is virtually identical to problem 7, just with a bigger cap and counting by)
+(value, rather than by index. As such, most of this code is wholesale copied, with a)
+(few lines in GeneratePrimes modified to use the sum instead, and to check the value)
+(as the limit instead of the index).
+
+Modulo takes divisor and dividend                                 ( func Modulo{divisor, dividend}                  )
+  Let quotient be divisor over dividend                           (   quotient = divisor / dividend                 )
+  Turn down quotient                                              (   quotient = floor{quotient}                    )
+  Give back divisor minus quotient times dividend                 (   return divisor - quotient * dividend          ) 
+
+Let primes at 1 be 2                                              ( primes[1] = 2                                   )
+Let primes at 2 be 3                                              ( primes[2] = 3                                   )
+
+IsPrime takes num                                                 ( func isPrime{num}                               )
+  ipIdx is 1                                                      (   ipIdx = 1                                     )
+  Let ipPrime be primes at ipIdx                                  (   ipPrime = primes[idx]                         )
+  Until ipIdx is primes or ipPrime of ipPrime is greater than num (   while ipIdx == len{primes} or ipPrime^2 > num )
+    If 0 is Modulo taking num, ipPrime                            (     if 0 == Modulo{num, ipPrime}                )
+      give back false                                             (       return false                              )
+
+    build ipIdx up                                                (     ipIdx++                                     )
+    Let ipPrime be primes at ipIdx                                (     ipPrime = primes[idx]                       )
+
+  give back true                                                  (   return true                                   )
+
+GeneratePrimes takes upToVal                                      ( func GeneratePrimes{upToVal}                    )
+  Let sum be 5                                                    ( sum = 5                                         )
+  gpIdx is 3                                                      (   gpIdx = 3                                     )
+  gpPrime is 3                                                    (   gpPrime = 3                                   )
+  While gpPrime is as low as upToVal                              (   while gpPrime <= upToVal                      )
+    Let gpPrime be with 2                                         (     gpPrime += 2                                )
+    If IsPrime taking gpPrime                                     (     if IsPrime{gpPrime}                         )
+      Let primes at gpIdx be gpPrime                              (       primes[gpIdx] = gpPrime                   )
+	  Let sum be with gpPrime                                     (       sum += gpPrime
+      build gpIdx up                                              (       gpIdx++                                   )
+ 
+
+  give back sum                                                   (   return sum                                    )
+
+limit is 2000000                                                  (  limit = 10001                                  )
+say GeneratePrimes taking limit                                   (  print{GeneratePrimes{limit}}                   )
+  
