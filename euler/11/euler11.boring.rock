@@ -21,7 +21,7 @@ NumAt takes row and col                              ( func NumAt{row, col}     
   Give back result                                   (   return result                               )
 
 Let searchDistance be 3                              ( searchDistance = 3                            )
-Search takes dx, dy                                  ( func Search{row, col}                         )
+Search takes dx, dy                                  ( func Search{x, y}                         )
   Let maxProduct be 0                                (   maxProduct = 0                              )
   Let xIdx be 0                                      (   xIdx = 0                                    )
   Let xBound be gridSize minus dx of searchDistance  (   xBound = gridSize - dx * searchDistance     )

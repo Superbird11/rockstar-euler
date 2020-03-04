@@ -1,0 +1,22 @@
+Modulo takes divisor and dividend
+  Let quotient be divisor over dividend
+  Turn down quotient
+  Give back divisor minus quotient times dividend
+
+  
+(number of factors - takes a shortcut by counting up to sqrt of number)
+(then doubles that, and adds one if the number is a square)
+NumFactors takes num
+  Let factors be 0
+  Let index be 1
+  While index of index is less than num
+    If Modulo taking num, index is 0
+      build factors up 
+ 
+    build index up
+  
+  Let factors be of 2
+  If index of index is num 
+    build factors up 
+  
+  give back factors
