@@ -1,0 +1,37 @@
+Modulo takes divisor and dividend                 ( func Modulo{divisor, dividend}                  )
+  Let quotient be divisor over dividend           (   quotient = divisor / dividend                 )
+  Turn down quotient                              (   quotient = floor{quotient}                    )
+  Give back divisor minus quotient times dividend (   return divisor - quotient * dividend          ) 
+
+
+Collatz takes n                                   ( func Collatz{n}                                 )
+  If Modulo taking n, 2                           (   if Modulo{n, 2}  // != 0                      )
+    Give back 3 of n plus 1                       (     return 3*n + 1                              )
+    
+  Give back n over 2                              (   return n / 2                                  )
+  
+Let record at 1 be 1                              ( record = [1: 1]      // cache results per k     )
+ChainLength takes k                               ( func ChainLength{k}  // recursive function      )
+  If record at k                                  (   if record[k]  // is not undefined             )
+    Give back record at k                         (     return record[k] // utilize cache           )
+  
+  i is 1                                          (   i = 1                                         )
+  Let m be Collatz taking k                       (   m = Collatz{k}                                )
+  Let i be with ChainLength taking m              (   i += ChainLength{m}                           )
+  Let record at k be i                            (   record[k] = i                                 )
+  Give back i                                     (   return i                                      )
+  
+  
+maxChain is 0                                     ( maxChain = 0                                    )
+maxK is 0                                         ( maxK = 0                                        )
+limit is 1000000                                  ( limit = 1000000                                 )
+idx is 1                                          ( idx = 1                                         )
+Until idx is limit                                ( while idx < limit                               )
+  Let length be ChainLength taking idx            (   length = ChainLength{idx}                     )
+  If length is greater than maxChain              (   if length > maxChain                          )
+    let maxChain be length                        (     maxChain = length                           )
+    let maxK be idx                               (     maxK = idx                                  )
+    
+  build idx up                                    (   idx ++                                        )
+
+Say maxK                                          ( print{maxK}                                     )
