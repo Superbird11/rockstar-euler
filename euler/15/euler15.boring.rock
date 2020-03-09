@@ -1,0 +1,31 @@
+(Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner.)
+(How many such routes are there through a 20×20 grid?)
+
+(This is a well-understood binomial coefficient problem, in combinatorics)
+(Given a m*n grid, the number of paths is)
+(  m+n choose m == m+n choose n )
+(Another cursory google search shows us that the binomial coefficient n choose k)
+(can be represented by)
+(   n choose k == n! / {k! * {n-k}!}  )
+(or, in our case,
+(   2n choose n == {2n}! / {2n!} )
+(The problem comes in not overflowing, or losing precision, during the implementation.)
+(If we use a raw factorial function, as is intuitive,)
+(then we overflow the mantissa and lose our precision.)
+(The breakthrough comes from noting that)
+(  {2n}! / {2n!}  ==  {2n * {2n-1} * ... * {n+1}} / {n * {n-1} * ... * 2 * 1} )
+(So we can count from both sides and meet in the middle.)
+
+
+Let solution be 1                ( solution = 1            )
+Input is 20                      ( input = 20              )
+Let ceiling be input with input  ( ceiling = input * input )
+Let floor be input over input    ( floor = input / input   )
+Until floor is as big as ceiling ( while floor < ceiling   )
+  Let solution be of ceiling     (   solution *= ceiling   )
+  Let solution be over floor     (   solution /= floor     )
+  Knock ceiling down             (   ceiling --            )
+  Build floor up                 (   floor ++              )
+
+Say solution                     ( print{solution}         )
+
