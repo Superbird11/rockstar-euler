@@ -1,0 +1,75 @@
+(If the numbers 1 to 5 are written out in words: one, two, three, four, five,)
+( then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.               )
+
+(If all the numbers from 1 to 1000 [one thousand] inclusive were written out )
+(in words, how many letters would be used?                                   )
+
+(NOTE: Do not count spaces or hyphens. For example, 342 [three hundred and   )
+(forty-two] contains 23 letters and 115 [one hundred and fifteen] contains   )
+(20 letters. The use of "and" when writing out numbers is in compliance with )
+(British usage.                                                              )
+
+Modulo takes divisor, dividend                            ( func Modulo{divisor, dividend}               )
+  Let quotient be divisor over dividend                   (   quotient = divisor / dividend              )
+  Turn down quotient                                      (   quotient = floor{quotient}                 )
+  Give back divisor minus quotient times dividend         (   return divisor - quotient * dividend       )
+
+(Note: I would use elseifs for this, normally, but I had trouble getting them to work while nested in Satriani)
+NumberOfLetters takes n                                   ( func NumberOfLetters{n}                      )
+  If n is 1000 give back 11                               (   if n == 1000 return 11                     )
+  
+  If n is 0 give back 0                                   (   if n == 0 return 0                         )
+  
+  If n is as low as 2 give back 3                         (   if n <= 2 return 3                         )
+  
+  If n is 3 give back 5                                   (   if n <= 3 return 5                         )
+  
+  If n is as low as 5 give back 4                         (   if n <= 5 return 4                         )
+  
+  If n is 6 give back 3                                   (   if n == 6 return 3                         )
+  
+  If n is as low as 8 give back 5                         (   if n <= 8 return 5                         )
+  
+  If n is 9 give back 4                                   (   if n <= 9 return 4                         )
+  
+  If n is 10 give back 3                                  (   if n <= 10 return 3                        )
+  
+  If n is as low as 12 give back 6                        (   if n <= 12 return 6                        )
+  
+  If n is as low as 14 give back 8                        (   if n <= 14 return 8                        )
+  
+  If n is as low as 16 give back 7                        (   if n <= 16 return 7                        )
+  
+  If n is 17 give back 9                                  (   if n <= 17 return 9                        )
+  
+  If n is as low as 19 give back 8                        (   if n <= 19 return 8                        )
+
+  If n is as big as 100                                   (   if n >= 100                                )
+    Let bottomPart be Modulo taking n, 100                (     bottomPart = Modulo{n, 100}              )
+    Let bottomSize be NumberOfLetters taking bottomPart   (     bottomSize = NumberOfLetters{bottomPart} )
+    If bottomSize is 0                                    (     if bottomSize == 0                       )
+      Let bottomSize be without 3                         (       bottomSize -= 3    // remove the 'and' )
+      
+    Let topPart be n over 100                             (     topPart = n / 100                        )
+    Turn down topPart                                     (     topPart = floor{topPart}                 )
+    Let topSize be NumberOfLetters taking topPart         (     topSize = NumberOfLetters{topPart}       )
+    Give back topSize plus bottomSize plus 10             (     return topSize + bottomSize + 10         )
+    
+  Let onesPlace be Modulo taking n, 10                    (   onesPlace = Modulo{n, 10}                  )
+  Let onesSize be NumberOfLetters taking onesPlace        (   onesSize = NumberOfLetters{onesPlace}      )
+  If n is as big as 80 give back 6 plus onesSize          (   if n >= 80 return 6 + onesSize             )
+  
+  If n is as big as 70 give back 7 plus onesSize          (   if n >= 70 return 7 + onesSize             )
+  
+  If n is as big as 40 give back 5 plus onesSize          (   if n >= 40 return 5 + onesSize             )
+  
+  Give back 6 plus onesSize                               (   return 6 + onesSize                        )
+
+Let i be 1                                                ( i = 1                                        )
+Let total be 0                                            ( total = 0                                    )
+Until i is greater than 1000                              ( while i <= 1000                              )
+  Let total be with NumberOfLetters taking i              (   total += NumberOfLetters{i}                )
+  Build i up                                              (   i ++                                       )
+  
+Say total                                                 ( print{total}                                 )
+    
