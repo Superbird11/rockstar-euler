@@ -1,0 +1,35 @@
+(n! means n × [n − 1] × ... × 3 × 2 × 1                                          )
+(For example, 10! = 10 × 9 × ... × 3 × 2 × 1 = 3628800,                          )
+(and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.  )
+(Find the sum of the digits in the number 100!                                   )
+
+a zero is lovestruck
+ten is a ladykiller
+a hundred is a lovestruck ladykiller
+let one be ten over ten
+
+Let fixedwidth at a zero be one                              ( fixedwidth = [1]                            )
+Let factor be one                                            ( factor = 1                                  )
+Let carry be empty                                           ( carry = 0                                   )
+Until factor is bigger than a hundred                        ( while factor <= 100:                        )
+  Let idx be a zero                                          (   idx = 0                                   )
+  Let width be fixedwidth                                    (   width = len{fixedwidth}                   )
+  Until idx is as big as width and carry is a zero           (   while idx < width && carry != 0:          )
+    If idx is less than width                                (     if idx < width:                         )
+      Let carry be with factor times fixedwidth at idx       (       carry += factor * fixedwidth[idx]     )
+      
+    Let newcarry be carry over ten                           (     newcarry = carry / 10                   )
+    Turn down newcarry                                       (     newcarry = floor{newcarry}              )
+    Let fixedwidth at idx be carry without newcarry of ten   (     fixedwidth[idx] = carry - newcarry * 10 )
+    Let carry be newcarry                                    (     carry = newcarry                        )
+    Build idx up                                             (     idx ++                                  )
+    
+  Build factor up                                            (   factor ++                                 )
+  
+Let sum be a zero                                            ( sum = 0                                     )
+Let ct be a zero                                             ( ct = 0                                      )
+Until ct is as big as fixedwidth                             ( while ct < len{fixedwidth}:                 )
+  Let sum be with fixedwidth at ct                           (   sum += fixedwidth[ct]                     )
+  Build ct up                                                (   ct ++                                     )
+
+Shout sum                                                    ( print{sum}                                  )
