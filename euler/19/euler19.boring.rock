@@ -1,0 +1,52 @@
+(You are given the following information, but you may prefer to do some research for yourself.            )
+(  1 Jan 1900 was a Monday.                                                                               )
+(  Thirty days has September,                                                                             )
+(  April, June and November.                                                                              )
+(  All the rest have thirty-one,                                                                          )
+(  Saving February alone,                                                                                 )
+(  Which has twenty-eight, rain or shine.                                                                 )
+(  And on leap years, twenty-nine.                                                                        )
+(A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.)
+(How many Sundays fell on the first of the month during the twentieth century [1 Jan 1901 to 31 Dec 2000]?)
+
+Modulo takes divisor and dividend                                       ( func Modulo{divisor, dividend}:                         )
+  Let quotient be divisor over dividend                                 (   quotient = divisor / dividend                         )
+  Turn down quotient                                                    (   quotient = floor{quotient}                            )
+  Give back divisor minus quotient times dividend                       (   return divisor - quotient * dividend                  )
+
+(0-indexed month, for simplicity)
+DaysInMonth takes month, year                                           ( func DaysInMonth{month, year}:                          )
+  If month is 1                                                         (   if month == 1:                                        )
+    If Modulo taking year, 4                                            (     if Modulo{year, 4}:  // implicit > 0                )
+      Give back 28                                                      (       return 28                                         )
+    
+    Give back 29                                                        (     return 29                                           )
+    
+  If month is less than 7                                               (   if month < 7                                          )
+    If modulo taking month, 2                                           (     if Modulo{month, 2}: // implicit > 0                )
+      Give back 30                                                      (       return 30                                         )
+      
+    Give back 31                                                        (     return 31                                           )
+    
+  If Modulo taking month, 2                                             (   if Modulo{month, 2}:   // implicit > 0                )
+    Give back 31                                                        (     return 31                                           )
+  
+  Give back 30                                                          (   return 30                                             )
+  
+(1 Jan 1901 was a tuesday. Sunday will be index 0, for simplicity)
+Let sundays be 0                                                        ( sundays = 0                                             )
+Let dayOfWeek be 2                                                      ( dayOfWeek = 2                                           )
+Let currentYear be 1901                                                 ( currentYear = 1901                                      )
+While currentYear is as low as 2000                                     ( while currentYear <= 2000:                              )
+  Let currentMonth be 0                                                 (   currentMonth = 0                                      )
+  While currentMonth is less than 12                                    (   while currentMonth < 12:                              )
+    If not Modulo taking dayOfWeek, 7                                   (     if !Modulo{dayOfWeek, 7}:                           )
+      Build sundays up                                                  (       sundays ++                                        )
+    
+    Let dayOfWeek be with DaysInMonth taking currentMonth, currentYear  (     dayOfWeek += DaysInMonth{currentMonth, currentYear} )
+    Build currentMonth up                                               (     currentMonth ++                                     )
+    
+  Build currentYear up                                                  (   currentYear ++                                        )
+  
+Shout sundays                                                           ( print{sundays}                                          )
+  
