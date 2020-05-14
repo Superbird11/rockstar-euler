@@ -1,0 +1,81 @@
+(Using `names.txt`, a 46K text file containing over five-thousand first names, begin by    )
+(sorting it into alphabetical order. Then working out the alphabetical value for each name,)
+(multiply this value by its alphabetical position in the list to obtain a name score.      )
+(                                                                                          )
+(For example, when the list is sorted into alphabetical order, COLIN, which is worth       )
+(  3 + 15 + 12 + 9 + 14 = 53                                                               )
+(is the 938th name in the list. So, COLIN would obtain a score of 938 × 53 = 49714.        )
+(                                                                                          )
+(What is the total of all the name scores in the file?                                     )
+
+Let one be 1
+
+(Note: we will use stdin as input for the names.txt file.  )
+(The given names.txt file is constrained to only one line, )
+(containing a comma-separated list of strings. Each string )
+(is contained within "quotation marks". These would be     )
+(annoying to work with, so they've been removed in the     )
+(`names.txt` file included here.                           )
+Listen to namesDotTxt                                                      ( namesDotTxt = input{}                                    )
+Cut namesDotTxt into namesList with ","                                    ( namesList = namesDotTxt.split{","}                       )
+Let numNames be namesList                                                  ( numNames = len{namesList}                                )
+
+Swap takes posA, posB                                                      ( func Swap{posA, posB}:                                   )
+  Let temp be namesList at posA                                            (   temp = namesList[posA]                                 )
+  Let namesList at posA be namesList at posB                               (   namesList[posA] = namesList[posB]                      )
+  Let namesList at posB be temp                                            (   namesList[posB] = temp                                 )
+  
+(left is inclusive, right is exclusive)
+Quicksort takes leftBorder, rightBorder                                    ( func Quicksort{leftBorder, rightBorder}:                 )
+  If leftBorder plus 1 is as big as rightBorder                            (   if leftBorder + 1 >= rightBorder                       )
+    give back nothing                                                      (     return                                               )
+    
+  Let pivot be namesList at leftBorder                                     (   pivot = namesList[leftBorder]                          )
+  Let pivotIdx be leftBorder                                               (   pivotIdx = leftBorder                                  )
+  Let currLeft be leftBorder plus one                                      (   currLeft = leftBorder + 1                              )
+  Let currRight be rightBorder minus one                                   (   currRight = rightBorder - 1                            )
+  Until currLeft is greater than currRight                                 (   while currLeft <= currRight:                           )
+    Let currName be namesList at currLeft                                  (     currName = namesList[currLeft]                       )
+    If currName is less than pivot                                         (     if currName < pivot:                                 )
+      Swap taking pivotIdx, currLeft                                       (       Swap{pivotIdx, currLeft}                           )
+      Let pivotIdx be currLeft                                             (       pivotIdx = currLeft                                )
+      Build currLeft up                                                    (       currLeft ++                                        )
+      Take it to the top                                                   (       continue                                           )
+      
+    Swap taking currLeft, currRight                                        (     Swap{currLeft, currRight}                            )
+    Knock currRight down                                                   (     currRight --                                         )
+    
+  Quicksort taking leftBorder, pivotIdx                                    (   QuickSort{leftBorder, pivotIdx}                        )
+  Quicksort taking currLeft, rightBorder                                   (   QuickSort{currLeft, rightBorder}                       )
+  
+The alphabet says ABCDEFGHIJKLMNOPQRSTUVWXYZ                               ( alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"                  )
+Shatter the alphabet                                                       ( alphabet = alphabet.split{}                              )
+LetterScore takes letter                                                   ( func LetterScore{letter}:                                )
+  Let alphabetIdx be 0                                                     (   alphabetIdx = 0                                        )
+  Until letter is the alphabet at alphabetIdx                              (   while letter != alphabet[alphabetIdx]:  // naive check )
+    build alphabetIdx up                                                   (     alphabetIdx ++   // doesn't account for nonexistence )
+    
+  Give back alphabetIdx plus one                                           (   return alphabetIdx + 1                                 )
+  
+NameScore takes name                                                       ( func NameScore{name}:                                    )
+  Let nameChrIdx be 0                                                      (   nameChrIdx = 0                                         )
+  Let letterScoreSum be 0                                                  (   letterScoreSum = 0                                     )
+  Cut name into nameArray                                                  (   nameArray = name.split{}                               )
+  Until nameChrIdx is nameArray                                            (   while nameChrIdx < len{nameArray}:                     )
+    Let letterScoreSum be with LetterScore taking nameArray at nameChrIdx  (     letterScoreSum += LetterScore{nameArray[nameChrIdx]} )
+    Build nameChrIdx up                                                    (     nameChrIdx ++                                        )
+    
+  Give back letterScoreSum                                                 (   return letterScoreSum                                  )
+
+Quicksort taking 0, numNames                                               ( Quicksort{0, numNames}                                   )
+Let scoreSum be 0                                                          ( scoreSum = 0                                             )
+Let nameIdx be 0                                                           ( nameIdx = 0                                              )
+Until nameIdx is numNames                                                  ( while nameIdx < numNames:                                )
+  Let currentName be namesList at nameIdx                                  (   currentName = namesList[nameIdx]                       )
+  Let currentNameScore be NameScore taking currentName                     (   currentNameScore = NameScore{currentName}              )
+  Build nameIdx up                                                         (   nameIdx ++                                             )
+  Let currentScore be currentNameScore times nameIdx                       (   currentScore = currentNameScore * nameIdx              )
+  Let scoreSum be with currentScore                                        (   scoreSum += currentScore                               )
+  
+Say scoreSum                                                               ( print{scoreSum}                                          )
+  
