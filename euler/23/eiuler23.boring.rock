@@ -1,0 +1,80 @@
+(A perfect number is a number for which the sum of its proper divisors is exactly )
+(equal to the number. For example, the sum of the proper divisors of 28 would be  )
+(  1 + 2 + 4 + 7 + 14 = 28                                                        )
+(which means that 28 is a perfect number.                                         )
+(                                                                                 )
+(A number n is called deficient if the sum of its proper divisors is less than n  )
+(and it is called abundant if this sum exceeds n.                                 )
+(                                                                                 )
+(As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest      )
+(number that can be written as the sum of two abundant numbers is 24. By          )
+(mathematical analysis, it can be shown that all integers greater than 28123 can  )
+(be written as the sum of two abundant numbers. However, this upper limit cannot  )
+(be reduced any further by analysis even though it is known that the greatest     )
+(number that cannot be expressed as the sum of two abundant numbers is less than  )
+(this limit.                                                                      )
+(                                                                                 )
+(Find the sum of all the positive integers which cannot be written as the sum of  )
+(two abundant numbers.                                                            )
+
+Modulo takes divisor, dividend                              ( func Modulo{divisor, dividend}                )
+  Let quotient be divisor over dividend                     (   quotient = divisor / dividend               )
+  Turn down quotient                                        (   quotient = floor{quotient}                  )
+  Give back divisor minus dividend times quotient           (   return divisor - dividend * quotient        )
+
+limit is it confirms I am more (28123)                      ( limit = 28123                                 )
+Let abundantNumbers at -1 be nothing                        ( abundantNumbers = []                          )
+Let sumsOfAbundantNumbers at -1 be nothing                  ( sumsOfAbundantNumbers = []                    )
+
+IsAbundantNumber takes possAbund                            ( func IsAbundantNumber{possAbund}:             )
+  Let factorSum be 1                                        (   factorSum = 1                               )
+  Let possFactor be 2                                       (   possFactor = 2                              )
+  Until possFactor times possFactor is as big as possAbund  (   while possFactor ** 2 < possAbund:          )
+    If Modulo taking possAbund, possFactor is 0             (     if Modulo{possAbund, possFactor} == 0:    )
+      Let corrFactor be possAbund over possFactor           (       corrFactor = possAbund / possFactor     )
+      Let factorSum be with possFactor                      (       factorSum += possFactor                 )
+      let factorSum be with corrFactor                      (       factorSum += corrFactor                 )
+      
+    Build possFactor up                                     (     possFactor ++                             )
+    
+  If possFactor times possFactor is possAbund               (   if possFactor ** 2 == possAbund:            )
+    Let factorSum be with possFactor                        (     factorSum += possFactor                   )
+    
+  Give back factorSum is greater than possAbund             (   return factorSum > possAbund                )
+  
+Let abundantIdx be 0                                        ( abundantIdx = 0                               )
+num is a me (12)                                            ( num = 12                                      )
+
+Until num is as big as limit                                ( while num < limit:                            )
+  If IsAbundantNumber taking num                            (   if IsAbundantNumber{num}:                   )
+    Let abundantNumbers at abundantIdx be num               (     abundantNumbers[abundantIdx] = num        )
+    Build abundantIdx up                                    (     abundantIdx ++                            )
+    
+  Build num up                                              (   num ++                                      )
+ 
+Let idxA be 0                                               ( idxA = 0                                      )
+Let idxB be 0                                               ( idxB = 0                                      )
+Until idxA is as big as abundantIdx                         ( while idxA < abundantIdx:                     )
+  Let idxB be idxA                                          (   idxB = idxA                                 )
+  Until idxB is as big as abundantIdx                       (   while idxB < abundantIdx:                   )
+    Let abundantA be abundantNumbers at idxA                (     abundantA = abundantNumbers[idxA]         ) 
+    Let abundantB be abundantNumbers at idxB                (     abundantB = abundantNumbers[idxB]         )
+    Let abundantSum be abundantA plus abundantB             (     abundantSum = abundantA + abundantB       )
+    If abundantSum is as big as limit                       (     if abundantSum >= limit:                  )
+      Break it down                                         (       break                                   )
+
+    Let sumsOfAbundantNumbers at abundantSum be true        (     sumsOfAbundantNumbers[abundantSum] = true )
+    Build idxB up                                           (     idxB ++                                   )
+    
+  Build idxA up                                             (   idxA ++                                     )
+  
+Let finalSum be 0                                           ( finalSum = 0                                  )
+Let sumsNum be 1                                            ( sumsNum = 1                                   )
+Until sumsNum is as big as limit                            ( while sumsNum < limit:                        )
+  If not sumsOfAbundantNumbers at sumsNum                   (   if !sumsOfAbundantNumbers[sumsNum]:         )
+    Let finalSum be with sumsNum                            (     finalSum += sumsNum                       )
+    
+  Build sumsNum up                                          (   sumsNum ++                                  )
+  
+Say finalSum                                                ( print{finalSum}                               )
+    
