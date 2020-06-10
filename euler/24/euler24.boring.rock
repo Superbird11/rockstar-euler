@@ -1,0 +1,72 @@
+(A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of    )
+(the digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically, we call  )
+(it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:                               )
+(    012   021   102   120   201   210                                                                   )
+(What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?          )
+
+(This approach is relatively inefficient, but it's the best I could come up with given the primitive     )
+(tools that Rockstar provides. It takes about 7.5 minutes to run on the online Satriani, on my machine.  )
+
+Let lastIndex be 9                                   ( lastIndex = 9  // defines length of permutation   )
+Let permArray at 0 be nothing                        ( permArray = []                                    )
+Let count be 0                                       ( count = 0                                         )
+Until count is greater than lastIndex                ( while count <= lastIndex:                         )
+  Let permArray at count be count                    (   permArray[count] = count                        )
+  Build count up                                     (   count ++                                        )
+  
+AppearsInPermutation takes searchItem, beforeIdx     ( func AppearsInPermutation{searchItem, beforeIdx}: )
+  Let searchIdx be 0                                 (   searchIdx = 0                                   )
+  Until searchIdx is beforeIdx                       (   while searchIdx < beforeIdx:                    )
+    Let foundItem be permArray at searchIdx          (     foundItem = permArray[searchIdx]              )
+    If foundItem is searchItem                       (     if foundItem == searchItem:                   )
+      Give back true                                 (       return true                                 )
+
+    Build searchIdx up                               (     searchIdx ++                                  )
+
+  Give back false                                    (   return false                                    )
+
+
+NextPermutation takes xx                             ( func NextPermutation{}:                           )
+  xx (store current state of permutation)
+  Join permArray into retPermutation                 (   retPermutation = permArray.join{}               )
+  xx (counting from back, find first index `ooIdx` of non-reverse-sorted)
+  Let ooIdx be lastIndex minus 1                     (   ooIdx = lastIndex - 1                           )
+  Let ioIdx be lastIndex                             (   ioIdx = lastIndex                               )
+  Let ooItem be permArray at ooIdx                   (   ooItem = permArray[ooIdx]                       )
+  Let ioItem be permArray at ioIdx                   (   ioItem = permArray[ioIdx]                       )
+  While ooItem is greater than ioItem                (   while ooItem > ioItem:                          )
+    Knock ooIdx down                                 (     ooIdx --                                      )
+    Knock ioIdx down                                 (     ioIdx --                                      )
+    Let ooItem be permArray at ooIdx                 (     ooItem = permArray[ooIdx]                     )
+    Let ioItem be permArray at ioIdx                 (     ioItem = permArray[ioIdx]                     )
+  
+  If ooIdx is less than 0                            (   if ooIdx < 0:                                   )
+    Give back retPermutation                         (     return retPermutation                         )
+
+  xx (increment that item such that it doesn't appear earlier in the permutation)
+  Build ooItem up                                    (   ooItem ++                                       )
+  While AppearsInPermutation taking ooItem, ooIdx    (   while AppearsInPermutation{ooItem, ooIdx}:      )
+    Build ooItem up                                  (     ooItem ++                                     )
+
+  Let permArray at ooIdx be ooItem                   (   permArray[ooIdx] = ooItem                       )
+  xx (For all further items, set to the lowest number that doesn't yet appear in the permutation)
+  xx (thus creating a new permutation)
+  Build ooIdx up                                     (   ooIdx ++                                        )
+  Until ooIdx is greater than lastIndex              (   while ooIdx <= lastIndex:                       )
+    Let ooItem be 0                                  (     ooItem = 0                                    )
+    While AppearsInPermutation taking ooItem, ooIdx  (     while AppearsInPermutation{ooItem, ooIdx}:    )
+      build ooItem up                                (       ooItem ++                                   )
+
+    Let permArray at ooIdx be ooItem                 (     permArray[ooIdx] = ooItem                     )
+    build ooIdx up                                   (     ooIdx ++                                      )
+
+  xx (return the prepared last permutation)
+  Give back retPermutation                           (   return retPermutation                           )
+  
+Let limit be 1000000                                 ( limit = 1000000                                   )
+Let count be 1                                       ( numPerms = 1                                      )
+Until count is limit                                 ( while count < limit:                              )
+  Build count up                                     (   count ++                                        )
+  NextPermutation taking nothing                     (   NextPermutation{}                               )
+  
+Say NextPermutation taking nothing                   ( print{NextPermutation{}}                          )
